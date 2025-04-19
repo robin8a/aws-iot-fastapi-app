@@ -1,0 +1,34 @@
+# Next.js Frontend
+frontend/.next/
+frontend/out/
+frontend/build/
+frontend/node_modules/
+frontend/yarn-error.log
+frontend/package-lock.json
+frontend/yarn.lock
+
+# FastAPI Backend
+backend/fast_api_venv/
+backend/__pycache__/
+backend/*.pyc
+backend/*.log
+backend/instance/
+backend/.env
+backend/.pytest_cache/
+backend/htmlcov/
+backend/.coverage
+backend/dist/
+
+# OS Specific Files
+.DS_Store
+Thumbs.db
+
+# Editor Specific Files
+.idea/
+.vscode/
+*.swp
+*.swo
+*.sqlite
+
+# Deployment Specific
+.vercel/
