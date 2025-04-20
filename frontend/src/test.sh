@@ -7,7 +7,7 @@ echo "============================================"
 
 # Check if backend is running
 echo "Checking if backend is running..."
-if curl -s http://localhost:8000/status > /dev/null; then
+if curl -s http://localhost:8001/status > /dev/null; then
   echo "✅ Backend is running"
 else
   echo "❌ Backend is not running. Please start the backend first with:"
@@ -18,12 +18,12 @@ fi
 # Test API endpoints
 echo -e "\nTesting API endpoints..."
 echo "GET /status:"
-curl -s http://localhost:8000/status | jq || echo "Failed to get status"
+curl -s http://localhost:8001/status | jq || echo "Failed to get status"
 
 # Test topic subscription
 echo -e "\nTesting topic subscription..."
 echo "POST /subscribe:"
-curl -s -X POST http://localhost:8000/subscribe \
+curl -s -X POST http://localhost:8001/subscribe \
   -H "Content-Type: application/json" \
   -d '{"topic":"test/topic"}' | jq || echo "Failed to subscribe to topic"
 
@@ -34,4 +34,4 @@ npm install -g wscat
 
 echo "Connecting to WebSocket endpoint..."
 echo "Press Ctrl+C after a few messages to exit"
-wscat -c ws://localhost:8000/ws
+wscat -c ws://localhost:8001/ws

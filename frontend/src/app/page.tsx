@@ -18,7 +18,7 @@ export default function IoTDashboard() {
   // Connect to WebSocket
   useEffect(() => {
     const connectWebSocket = () => {
-      const ws = new WebSocket('ws://localhost:8000/ws');
+      const ws = new WebSocket('ws://localhost:8001/ws');
       
       ws.onopen = () => {
         console.log('WebSocket connected');
@@ -68,7 +68,7 @@ export default function IoTDashboard() {
   useEffect(() => {
     const fetchStatus = async () => {
       try {
-        const response = await fetch('http://localhost:8000/status');
+        const response = await fetch('http://localhost:8001/status');
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
@@ -92,7 +92,7 @@ export default function IoTDashboard() {
   // Subscribe to a new topic
   const handleSubscribe = async () => {
     try {
-      const response = await fetch('http://localhost:8000/subscribe', {
+      const response = await fetch('http://localhost:8001/subscribe', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
