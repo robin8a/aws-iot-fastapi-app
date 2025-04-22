@@ -11,7 +11,7 @@ from awsiot import mqtt_connection_builder
 # --- Configuration ---
 # Replace with your AWS IoT endpoint
 ENDPOINT = "a3t35frz37six-ats.iot.us-east-1.amazonaws.com"  # Find this in your AWS IoT Core settings
-CLIENT_ID = "fastapi_device_simulator"  # Choose a unique client ID
+CLIENT_ID = "fastapi_device_simulator_1"  # Choose a unique client ID
 TOPIC_PUB = "colab/device/pub"
 TOPIC_SUB = "ts/proy_id/predio_id/device_id"
 
@@ -147,7 +147,21 @@ class AWSIoTClient:
         on_connection_failure=self.on_connection_failure,
         on_connection_closed=self.on_connection_closed)
 
-        
+        connect_future = mqtt_connection.connect()
+
+        # Future.result() waits until a result is available
+        connect_future.result()
+        print("Connected!")
+
+        # Subscribe
+        print('Subscribing to topic')
+        subscribe_future, packet_id = mqtt_connection.subscribe(
+        topic=TOPIC_SUB,
+        qos=mqtt.QoS.AT_LEAST_ONCE,
+        callback=self.on_message_received)
+
+        subscribe_result = subscribe_future.result()
+        print("Subscribed with {}".format(str(subscribe_result['qos'])))
         
     def get_topic_status(self) -> Dict[str, Any]:
         """
@@ -176,7 +190,7 @@ class AWSIoTClient:
 
             # Cannot synchronously wait for resubscribe result because we're on the connection's event-loop thread,
             # evaluate result with a callback instead.
-            resubscribe_future.add_done_callback(on_resubscribe_complete)
+            resubscribe_future.add_done_callback(self.on_resubscribe_complete)
 
 
     def on_resubscribe_complete(resubscribe_future):

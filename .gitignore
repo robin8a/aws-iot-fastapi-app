@@ -35,3 +35,7 @@ Thumbs.db
 
 # AWS Cert
 backend/_certs/
+
+# Logs
+*.log
+
