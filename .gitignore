@@ -32,3 +32,6 @@ Thumbs.db
 
 # Deployment Specific
 .vercel/
+
+# AWS Cert
+backend/_certs/
