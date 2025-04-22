@@ -65,7 +65,7 @@ class AWSIoTClient:
         """
         self.callbacks.append(callback)
     
-    async def simulate_message_reception(self, interval: int = 5):
+    async def simulate_message_reception(self, interval: int = 18):
         """
         Simulate receiving messages from AWS IoT Core
         This is a placeholder for testing purposes
